@@ -1,3 +1,9 @@
 <resources>
+
     <string name="app_name">UserInterface</string>
+    <string name="button_start_text">START</string>
+    <string name="button_functions_text">FUNCTIONS</string>
+    <string name="button_settings_text">SETTINGS &amp; DIAGNOSTICS</string>
+    <string name="button_help_text">HELP &amp; CONTACT</string>
+
 </resources>

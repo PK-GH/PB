@@ -1,4 +1,3 @@
-<!-- just a comment -->
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.piotr.userinterface">
@@ -17,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".StartScreen"
+            android:label="StartScreen"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
