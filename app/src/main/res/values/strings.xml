@@ -5,5 +5,6 @@
     <string name="button_functions_text">FUNCTIONS</string>
     <string name="button_settings_text">SETTINGS &amp; DIAGNOSTICS</string>
     <string name="button_help_text">HELP &amp; CONTACT</string>
+    <string name="warning_paintbot_should_be_placed_near_a_wall">WARNING: PaintBot Should Be Placed Near a Wall</string>
 
 </resources>

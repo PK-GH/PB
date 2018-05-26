@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/watercolorblue"
     android:id="@+id/start_menu">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,19 +15,17 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="30sp"
         android:textStyle="bold" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:text="WARNING: PaintBot Should Be Placed Near a Wall"
+        android:text="@string/warning_paintbot_should_be_placed_near_a_wall"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_alignParentLeft="true" />
-
     <Button
         android:id="@+id/start_painting_button"
         android:layout_width="180dp"
@@ -39,7 +36,6 @@
         android:textSize="30sp"
         android:onClick="OnStartConfirmation"
         />
-
     <Button
         android:id="@+id/do_not_start_painting_button"
         android:layout_width="180dp"
@@ -50,5 +46,4 @@
         android:text="No"
         android:textSize="30sp"
         android:onClick="OnNoStartConfirmation"/>
-
 </RelativeLayout>

@@ -33,17 +33,21 @@ public class StartScreen extends Activity {
         // Vid 5, Derek
         Intent toStart = new Intent();
 
-        setResult(RESULT_OK, toStart);
 
-        finish();
+
+        setResult(11, toStart);
+
+        finish(); // eventually will need to add something to these two intents
     }
     public void OnNoStartConfirmation(View view) {
 
         Intent DoNotStart = new Intent();
 
-        setResult(RESULT_CANCELED, DoNotStart);
-        //Don't know if we want result canceled
+        setResult(99, DoNotStart);
+        //Do not want canceled, indicates there was a failure on the button
 
         finish();
     }
+
+
 }

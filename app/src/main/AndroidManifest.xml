@@ -19,6 +19,8 @@
         <activity android:name=".StartScreen"
             android:label="StartScreen"
             android:theme="@style/AppTheme" />
+
+
     </application>
 
 </manifest>
