@@ -48,6 +48,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="130dp"
         android:text="No"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:onClick="OnNoStartConfirmation"/>
 
 </RelativeLayout>

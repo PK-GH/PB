@@ -18,7 +18,7 @@ public class StartScreen extends Activity {
 
         Intent activityStartHome = getIntent();
 
-        String previousActivity = activityStartHome.getExtras().getString("homeStart");
+        //String previousActivity = activityStartHome.getExtras().getString("homeStart");
 
         //15:40
 
@@ -31,13 +31,18 @@ public class StartScreen extends Activity {
 
     public void OnStartConfirmation(View view) {
         // Vid 5, Derek
-        //String
-
         Intent toStart = new Intent();
 
-        //toStart.putExtra("Don't need",)
-
         setResult(RESULT_OK, toStart);
+
+        finish();
+    }
+    public void OnNoStartConfirmation(View view) {
+
+        Intent DoNotStart = new Intent();
+
+        setResult(RESULT_CANCELED, DoNotStart);
+        //Don't know if we want result canceled
 
         finish();
     }

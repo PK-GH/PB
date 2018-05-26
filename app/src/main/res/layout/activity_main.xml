@@ -20,7 +20,7 @@
         android:id="@+id/TextView"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
-        android:text="Hello World!" />
+        android:text="Suuup Bitches!" />
 
     <ImageView
         android:id="@+id/powericon"
