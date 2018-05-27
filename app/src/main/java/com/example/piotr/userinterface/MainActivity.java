@@ -1,6 +1,11 @@
 package com.example.piotr.userinterface;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
@@ -17,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     // Testing GH
     // Used to load the 'native-lib' library on application startup.
     int i = 0;
-
+    private static final int REQUEST_BLUETOOTH = 0;
     static {
         System.loadLibrary("native-lib");
     }
@@ -26,10 +31,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
     }
 
     public void OnStartClick(View view) {
-    //from Tutorial 5 Derek Banas
+        //from Tutorial 5 Derek Banas
+        // Here, thisActivity is the current activity
+
         Intent GetStartConfirmation = new Intent(this, StartScreen.class);
         /*
         Intent: pass context, and activity to open
@@ -42,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(GetStartConfirmation, res);
         //res is updated with the information we need
         //if RESULT_CANCELED == 0, then 'No' selected, if
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
 
         // will need some return result, then we'll update the image
@@ -68,4 +79,6 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageResource(powerIcon);
         }
     }
+
+
 }
