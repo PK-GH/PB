@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Button btnStartConnection;
     Button btnSend;
 
-    EditText etSend;
+    //EditText etSend;
 
     private static final UUID MY_UUID_INSECURE =
             UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         btnStartConnection = (Button) findViewById(R.id.btnStartConnection);
         btnSend = (Button) findViewById(R.id.btnSend);
-        etSend = (EditText) findViewById(R.id.editText);
+        //etSend = (EditText) findViewById(R.id.editText);
 
         //Broadcasts when bond state changes (ie:pairing)
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
@@ -216,7 +216,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                byte[] bytes = etSend.getText().toString().getBytes(Charset.defaultCharset());
+                char data[] = {'s','t','a','r','t'};
+                String str = new String(data);
+                byte[] bytes = str.getBytes(Charset.defaultCharset());
                 mBluetoothConnection.write(bytes);
             }
         });
