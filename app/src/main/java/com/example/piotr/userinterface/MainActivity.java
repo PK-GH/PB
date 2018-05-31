@@ -25,6 +25,8 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private static final String TAG = "MainActivity";
 
+    int startPaintbot = 0;
+
     BluetoothAdapter mBluetoothAdapter;
     Button btnEnableDisable_Discoverable;
 
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     Button btnStartConnection;
     Button btnSend;
+    Button btnStartClick;
 
     //EditText etSend;
 
@@ -46,7 +49,52 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     ListView lvNewDevices;
 
+    public void OnStartClick(View view) {
+        //from Tutorial 5 Derek Banas
+        // Here, thisActivity is the current activity
+        Intent GetStartConfirmation = new Intent(this, StartConfirm.class);
 
+        final int res = 99; // can use as a signal for another time
+
+        startActivityForResult(GetStartConfirmation, res);
+        //res is updated with the information we need
+        //if RESULT_CANCELED == 0, then 'No' selected, if
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // will need some return result, then we'll update the image
+        startPaintbot = resultCode;
+
+        updateUi(resultCode);
+    }
+    private void updateUi(int res)
+    {
+        if(res == 1) {
+            //this should all be done on a result of '1'
+            char data[] = {'s', 't', 'a', 'r', 't', 'u', 'p'};
+            String str = new String(data);
+            byte[] bytes = str.getBytes(Charset.defaultCharset());
+            mBluetoothConnection.write(bytes);
+        }
+        else if (res == 0)
+        {
+            char data[] = {'s', 'u', 'p','p'};
+            String str = new String(data);
+            byte[] bytes = str.getBytes(Charset.defaultCharset());
+            mBluetoothConnection.write(bytes);// do some main layout icon updates after.
+        }
+        else
+        {
+            char data[] = {'s', 'y', 'w','a'};
+            String str = new String(data);
+            byte[] bytes = str.getBytes(Charset.defaultCharset());
+            mBluetoothConnection.write(bytes);
+        }
+    }
     // Create a BroadcastReceiver for ACTION_FOUND
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -110,9 +158,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         }
     };
-
-
-
 
     /**
      * Broadcast Receiver for listing devices that are not yet paired
@@ -187,6 +232,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         btnStartConnection = (Button) findViewById(R.id.btnStartConnection);
         btnSend = (Button) findViewById(R.id.btnSend);
+
+        btnStartClick = (Button) findViewById(R.id.startclick);
+
         //etSend = (EditText) findViewById(R.id.editText);
 
         //Broadcasts when bond state changes (ie:pairing)
@@ -213,17 +261,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
+       /* btnStartClick.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                char data[] = {'s','t','a','r','t'};
-                String str = new String(data);
-                byte[] bytes = str.getBytes(Charset.defaultCharset());
-                mBluetoothConnection.write(bytes);
+            public void onClick(View v) {
+                OnStartClick();
             }
-        });
+        });*/
 
     }
+
+
+        //btnSend = (Button) findViewById(R.id.btnSend); // PROBABLY NOT THE RIGHT PLACE
+
 
     //create method for starting connection
 //***remember the conncction will fail and app will crash if you haven't paired first
