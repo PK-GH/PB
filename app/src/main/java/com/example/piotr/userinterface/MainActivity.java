@@ -33,12 +33,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     BluetoothConnectionService mBluetoothConnection;
 
+    Button do_not_start_painting_button;
     Button btnStartConnection;
     Button btnSend;
     Button btnStartClick;
     Button cancelSend;
     Button btnONOFF;
     Button btnFindUnpairedDevices;
+    Button btnEmergencyShutdown;
 
     TextView beginspraytv;
     TextView warningtv;
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         else
         {
+            btnEmergencyShutdown
             char data[] = {'s', 'y', 'w','a'};
             String str = new String(data);
             byte[] bytes = str.getBytes(Charset.defaultCharset());
@@ -241,9 +244,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
         mBTDevices = new ArrayList<>();
         btnFindUnpairedDevices = (Button) findViewById(R.id.btnFindUnpairedDevices);
-
+        btnEmergencyShutdown = (Button) findViewById(R.id.btnEmergencyShutdown);
         btnStartConnection = (Button) findViewById(R.id.btnStartConnection);
         btnSend = (Button) findViewById(R.id.btnSend);
+        do_not_start_painting_button = (Button) findViewById(R.id.do_not_start_painting_button);
 
         btnStartClick = (Button) findViewById(R.id.startclick);
         cancelSend = (Button) findViewById(R.id.do_not_start_painting_button);
@@ -251,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         beginspraytv = (TextView) findViewById(R.id.beginspraytv);
         warningtv = (TextView) findViewById(R.id.warningtv);
 
+        ////
         //Default screen button layout
         btnEnableDisable_Discoverable.setVisibility(View.VISIBLE);
         lvNewDevices.setVisibility(View.VISIBLE);
@@ -258,11 +263,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         btnStartClick.setVisibility(View.VISIBLE);
         btnFindUnpairedDevices.setVisibility(View.VISIBLE);
 
-        //conceal some buttons
         cancelSend.setVisibility(View.GONE);
+        btnEmergencyShutdown.setVisibility(View.GONE);
         btnSend.setVisibility(View.GONE);
         beginspraytv.setVisibility(View.GONE);
         warningtv.setVisibility(View.GONE);
+        ////
 
         //Broadcasts when bond state changes (ie:pairing)
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
@@ -319,23 +325,69 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             private void sendStartSignal() {
                 //display an off button for BT shutdown
-                
+                btnSend.setVisibility(View.GONE);
+                cancelSend.setVisibility(View.GONE);
+                beginspraytv.setVisibility(View.GONE);
+                warningtv.setVisibility(View.GONE);
+                btnEmergencyShutdown.setVisibility(View.VISIBLE);
+
                 //send byestream signal to start
+                char data[] = {'s', 't', 'a', 'r', 't', 'u', 'p'};
+                String str = new String(data);
+                byte[] bytes = str.getBytes(Charset.defaultCharset());
+                mBluetoothConnection.write(bytes);
+            }
+        });
+        do_not_start_painting_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Default screen button layout
+                btnEnableDisable_Discoverable.setVisibility(View.VISIBLE);
+                btnONOFF.setVisibility(View.VISIBLE);
+                lvNewDevices.setVisibility(View.VISIBLE);
+                btnStartConnection.setVisibility(View.VISIBLE);
+                btnStartClick.setVisibility(View.VISIBLE);
+                btnFindUnpairedDevices.setVisibility(View.VISIBLE);
+
+                cancelSend.setVisibility(View.GONE);
+                btnEmergencyShutdown.setVisibility(View.GONE);
+                btnSend.setVisibility(View.GONE);
+                beginspraytv.setVisibility(View.GONE);
+                warningtv.setVisibility(View.GONE);
+                ////
+            }
+        });
+        btnEmergencyShutdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                char data[] = {'s', 't', 'o','p'};
+                String str = new String(data);
+                byte[] bytes = str.getBytes(Charset.defaultCharset());
+                mBluetoothConnection.write(bytes);
+
+                btnEnableDisable_Discoverable.setVisibility(View.VISIBLE);
+                btnONOFF.setVisibility(View.VISIBLE);
+                lvNewDevices.setVisibility(View.VISIBLE);
+                btnStartConnection.setVisibility(View.VISIBLE);
+                btnStartClick.setVisibility(View.VISIBLE);
+                btnFindUnpairedDevices.setVisibility(View.VISIBLE);
+
+                cancelSend.setVisibility(View.GONE);
+                btnEmergencyShutdown.setVisibility(View.GONE);
+                btnSend.setVisibility(View.GONE);
+                beginspraytv.setVisibility(View.GONE);
+                warningtv.setVisibility(View.GONE);
             }
         });
 
-       /* btnStartClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OnStartClick();
-            }
-        });*/
+/*        btnEmergencyShutdown
+        char data[] = {'s', 'y', 'w','a'};
+        String str = new String(data);
+        byte[] bytes = str.getBytes(Charset.defaultCharset());
+        mBluetoothConnection.write(bytes);
+*/
 
     }
-
-
-        //btnSend = (Button) findViewById(R.id.btnSend); // PROBABLY NOT THE RIGHT PLACE
-
 
     //create method for starting connection
 //***remember the conncction will fail and app will crash if you haven't paired first
