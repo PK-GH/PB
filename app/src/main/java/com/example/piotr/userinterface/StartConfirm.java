@@ -1,4 +1,4 @@
-package com.example.piotr.userinterface;
+/*package com.example.piotr.userinterface;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -44,3 +44,4 @@ public class StartConfirm extends MainActivity {
         finish();
     }
 }
+*/

@@ -50,16 +50,7 @@
         android:layout_below="@+id/btnFindUnpairedDevices"
         android:layout_centerHorizontal="true"
         android:text="4. Start Connection" />
-<!--
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="54dp"
-        android:hint="Enter Text Here" />
--->
+
     <Button
         android:id="@+id/startclick"
         android:layout_width="wrap_content"
@@ -67,8 +58,52 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
-        android:onClick="OnStartClick"
         android:text="5. Start Process" />
+
+
+    <TextView
+        android:id="@+id/beginspraytv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:text="Begin Spraying Process?"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/warningtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="@string/warning_paintbot_should_be_placed_near_a_wall"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_alignParentLeft="true" />
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/do_not_start_painting_button"
+        android:text="Yes"
+        android:textSize="30sp"
+
+        />
+    <Button
+        android:id="@+id/do_not_start_painting_button"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="130dp"
+        android:text="No"
+        android:textSize="30sp"
+    />
 
 
 </RelativeLayout>

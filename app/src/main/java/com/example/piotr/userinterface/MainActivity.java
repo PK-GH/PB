@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -35,6 +36,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Button btnStartConnection;
     Button btnSend;
     Button btnStartClick;
+    Button cancelSend;
+    Button btnONOFF;
+    Button btnFindUnpairedDevices;
+
+    TextView beginspraytv;
+    TextView warningtv;
 
     //EditText etSend;
 
@@ -49,28 +56,31 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     ListView lvNewDevices;
 
-    public void OnStartClick(View view) {
+   /* public void OnStartClick(View view) {
         //from Tutorial 5 Derek Banas
         // Here, thisActivity is the current activity
-        Intent GetStartConfirmation = new Intent(this, StartConfirm.class);
+        //Intent GetStartConfirmation = new Intent(this, StartConfirm.class);
 
-        final int res = 99; // can use as a signal for another time
+        //final int res = 99; // can use as a signal for another time
 
-        startActivityForResult(GetStartConfirmation, res);
+        //startActivityForResult(GetStartConfirmation, res);
         //res is updated with the information we need
         //if RESULT_CANCELED == 0, then 'No' selected, if
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    }*/
 
-        super.onActivityResult(requestCode, resultCode, data);
+    /*public void OnNoStartConfirmation(View view)
+    {
+        btnEnableDisable_Discoverable.setVisibility(View.VISIBLE);
+        lvNewDevices.setVisibility(View.VISIBLE);
+        btnStartConnection.setVisibility(View.VISIBLE);
+        btnStartClick.setVisibility(View.VISIBLE);
 
-        // will need some return result, then we'll update the image
-        startPaintbot = resultCode;
+        cancelSend.setVisibility(View.GONE);
+        btnSend.setVisibility(View.GONE);
 
-        updateUi(resultCode);
-    }
+    }*/
+    /*
     private void updateUi(int res)
     {
         if(res == 1) {
@@ -95,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             mBluetoothConnection.write(bytes);
         }
     }
+    */
     // Create a BroadcastReceiver for ACTION_FOUND
     private final BroadcastReceiver mBroadcastReceiver1 = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -225,17 +236,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btnONOFF = (Button) findViewById(R.id.btnONOFF);
+        final Button btnONOFF = (Button) findViewById(R.id.btnONOFF);
         btnEnableDisable_Discoverable = (Button) findViewById(R.id.btnDiscoverable_on_off);
         lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
         mBTDevices = new ArrayList<>();
+        btnFindUnpairedDevices = (Button) findViewById(R.id.btnFindUnpairedDevices);
 
         btnStartConnection = (Button) findViewById(R.id.btnStartConnection);
         btnSend = (Button) findViewById(R.id.btnSend);
 
         btnStartClick = (Button) findViewById(R.id.startclick);
+        cancelSend = (Button) findViewById(R.id.do_not_start_painting_button);
 
-        //etSend = (EditText) findViewById(R.id.editText);
+        beginspraytv = (TextView) findViewById(R.id.beginspraytv);
+        warningtv = (TextView) findViewById(R.id.warningtv);
+
+        //Default screen button layout
+        btnEnableDisable_Discoverable.setVisibility(View.VISIBLE);
+        lvNewDevices.setVisibility(View.VISIBLE);
+        btnStartConnection.setVisibility(View.VISIBLE);
+        btnStartClick.setVisibility(View.VISIBLE);
+        btnFindUnpairedDevices.setVisibility(View.VISIBLE);
+
+        //conceal some buttons
+        cancelSend.setVisibility(View.GONE);
+        btnSend.setVisibility(View.GONE);
+        beginspraytv.setVisibility(View.GONE);
+        warningtv.setVisibility(View.GONE);
 
         //Broadcasts when bond state changes (ie:pairing)
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
@@ -258,6 +285,42 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
                 startConnection();
+            }
+        });
+        btnStartClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startConfirm();
+            }
+
+            private void startConfirm() {
+                //remove buttons from layout
+                btnEnableDisable_Discoverable.setVisibility(View.GONE);
+                lvNewDevices.setVisibility(View.GONE);
+                btnStartConnection.setVisibility(View.GONE);
+                btnStartClick.setVisibility(View.GONE);
+                btnONOFF.setVisibility(View.GONE);
+                btnFindUnpairedDevices.setVisibility(View.GONE);
+
+                //now set the visibility to visible on the hidden buttons
+                btnSend.setVisibility(View.VISIBLE);
+                cancelSend.setVisibility(View.VISIBLE);
+                beginspraytv.setVisibility(View.VISIBLE);
+                warningtv.setVisibility(View.VISIBLE);
+
+                //and send the BT start signal
+            }
+        });
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendStartSignal();
+            }
+
+            private void sendStartSignal() {
+                //display an off button for BT shutdown
+                
+                //send byestream signal to start
             }
         });
 
