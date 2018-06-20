@@ -380,13 +380,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-/*        btnEmergencyShutdown
-        char data[] = {'s', 'y', 'w','a'};
-        String str = new String(data);
-        byte[] bytes = str.getBytes(Charset.defaultCharset());
-        mBluetoothConnection.write(bytes);
-*/
-
     }
 
     //create method for starting connection
@@ -403,9 +396,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         mBluetoothConnection.startClient(device,uuid);
     }
-
-
-
+    
     public void enableDisableBT(){
         if(mBluetoothAdapter == null){
             Log.d(TAG, "enableDisableBT: Does not have BT capabilities.");
@@ -503,7 +494,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2){
             Log.d(TAG, "Trying to pair with " + deviceName);
             mBTDevices.get(i).createBond();
-
             mBTDevice = mBTDevices.get(i);
             mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
         }

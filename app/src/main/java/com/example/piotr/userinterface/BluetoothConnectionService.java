@@ -23,8 +23,10 @@ public class BluetoothConnectionService {
 
     private static final String appName = "MYAPP";
 
-    private static final UUID MY_UUID_INSECURE =
-            UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
+            private static final UUID MY_UUID_INSECURE =
+            UUID.fromString("00001800-0000-1000-8000-00805f9b34fb");
+
+    //UUID MY_UUID_INSECURE;
 
     private final BluetoothAdapter mBluetoothAdapter;
     Context mContext;
@@ -266,9 +268,10 @@ public class BluetoothConnectionService {
         //Call this from the main activity to send data to the remote device
         public void write(byte[] bytes) {
             String text = new String(bytes, Charset.defaultCharset());
-            Log.d(TAG, "write: Writing to outputstream: " + text);
+
             try {
                 mmOutStream.write(bytes);
+                Log.d(TAG, "write: Writing to outputstream: " + text);
             } catch (IOException e) {
                 Log.e(TAG, "write: Error writing to output stream. " + e.getMessage() );
             }
@@ -304,6 +307,8 @@ public class BluetoothConnectionService {
         Log.d(TAG, "write: Write Called.");
         //perform the write
         mConnectedThread.write(out);
+
+        Log.d(TAG, "write: Write Success.");
     }
 
 }
